@@ -1,0 +1,43 @@
+.SideBar{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    top: 50px;
+    height: 90vh;
+    background-color: rgb(236, 225, 247);
+}
+
+.Title{
+    font-weight: 600;
+    font-size: large;
+    border: none;
+}
+
+.SideList{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 10px;
+    align-items: center;
+    justify-content: space-between;
+    height: 50%;
+    width: 60%;
+    list-style: none;
+}
+
+.SideItem{
+    /* display: flex;
+    align-items: center; */
+    /* justify-content: center; */
+    /* border: 2px solid black; */
+    /* border-radius: 10px; */
+    cursor: pointer;
+    margin: 4px;
+    height: 30px;
+    width: 100%;
+    /* margin: 20px; */
+    padding: 2px;
+}
+

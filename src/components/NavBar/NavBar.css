@@ -1,0 +1,24 @@
+.NavBar{
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #97b2ee;
+    height: 51px;
+}
+
+.NavList{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.NavItem{
+    display: flex;
+    cursor: pointer;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}

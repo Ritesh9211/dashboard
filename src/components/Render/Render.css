@@ -1,0 +1,29 @@
+.Charts {
+    position: absolute;
+    top: 50px;
+    left: 20%; /* Adjust this percentage based on your sidebar width */
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow charts to wrap to the next row */
+    align-content: flex-start; /* Start a new row when needed */
+    gap: 10px; /* Adjust the gap between charts if desired */
+  }
+  
+  .ChartItem {
+    flex: 1;
+    padding: 10px; /* Adjust the padding as needed */
+    background-color: #f0f0f0;
+  }
+  
+  .BarChart,
+  .LineChart,
+  .PieChart,
+  .AnotherChart {
+    /* width: 20%; */
+    height: 300px;
+  }
+
+ 
+  

@@ -9,19 +9,22 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 // Import your action creator
 import { useDispatch } from 'react-redux';
-import { setEndYear } from "../store/filterSlice"; // Import your action creator
+import { setLikelihood } from "../store/filterSlice"; // Import your action creator
 
 
 
-const EndYear = (props) => {
+const Likelihood = (props) => {
   const dispatch=useDispatch();
-  const datai = [2016, 2019,2022,2030, 2026, 2046,2055,2200];
+  const datai = [1,2,3,4];
+  
 
+  
   const [selectedValue, setSelectedValue] = useState(datai[0]);
 
   const Filter = props.filter;
   const type = props.type;
   // console.log("Filter",Filter)
+  // console.log("type",type)
 
   
 
@@ -38,7 +41,7 @@ const EndYear = (props) => {
 
   const handleFilterChange = (newFilterValue) => {
     // Dispatch the action using the dispatch function
-    dispatch(setEndYear(newFilterValue));
+    dispatch(setLikelihood(newFilterValue));
   };
 
   const handleDropdownChange = (event) => {
@@ -47,7 +50,6 @@ const EndYear = (props) => {
     handleFilterChange(newValue); // Dispatch the action with the selected value
   };
   
-
   
   return (
     // <div>did</div>
@@ -65,15 +67,17 @@ const EndYear = (props) => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow className='tablebar'>
-            <TableCell align="right">EndYear</TableCell>
+            <TableCell align="right">Likelihood</TableCell>
             <TableCell>Intensity</TableCell>
-            <TableCell align="right">Sector</TableCell>
-            <TableCell align="right">Region</TableCell>
+      {/* <button onClick={() => handleFilterChange(4)}>Set Filter to 4</button> */}
+            <TableCell align="right">EndYear</TableCell>
+            <TableCell align="right">Relevance</TableCell>
             <TableCell align="right">Pestle</TableCell>
             <TableCell align="right">Source</TableCell>
-            <TableCell align="right">Region</TableCell>
+            <TableCell align="right">Topic</TableCell>
             <TableCell align="right">Country</TableCell>
             <TableCell align="right">City</TableCell>
+            <TableCell align="right">Region</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -104,19 +108,18 @@ const EndYear = (props) => {
       })
       .map((filteredRow) =>
     (
-      
-      <TableRow align="right"
+      <TableRow
         key={filteredRow._id}
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
       >
         <TableCell align="right">
-          {filteredRow.end_year || "NULL"}
+          {filteredRow.likelihood || "NULL"}
         </TableCell>
          <TableCell component="th" scope="row">
           {filteredRow.intensity || "NULL"}
         </TableCell>
         <TableCell align="right">
-          {filteredRow.likelihood || "NULL"}
+          {filteredRow.end_year || "NULL"}
         </TableCell>
         <TableCell align="right">
           {filteredRow.relevance || "NULL"}
@@ -149,4 +152,4 @@ const EndYear = (props) => {
   )
 }
 
-export default EndYear;
+export default Likelihood;

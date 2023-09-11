@@ -64,10 +64,6 @@ const BarChart = (props) => {
         }
 
         
-        // const value = likelihoodCount[key];
-        // // labels.push(key);
-        // dataSet2.push(value)
-        // // console.log(`Key: ${key}, Second Value: ${value}`);
       }
     }
 
@@ -136,8 +132,8 @@ const BarChart = (props) => {
         {
           loading ? <Line
           data={state}
-          // height={400}
-          // width={600}
+          height={400}
+          width={600}
           options={ {
             responsive:true,
             maintainAspectRatio:false,

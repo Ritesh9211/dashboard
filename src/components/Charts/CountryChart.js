@@ -4,7 +4,7 @@ import {Bar, Line} from "react-chartjs-2"
 // import { data } from '../../data'
 import Chart from "chart.js/auto";
 
-const BarChart = (props) => {
+const CountryChart = (props) => {
 
 
 
@@ -20,31 +20,31 @@ const BarChart = (props) => {
 
 
 
-    const sectorCount = {};
+    const countryCount = {};
 
     //getting frequency
     for (let i = 0; i < data.length; i++) {
-        let secti = data[i].sector;
-        if (sectorCount[secti]) {
-          sectorCount[secti] += 1;
+        let secti = data[i].country;
+        if (countryCount[secti]) {
+          countryCount[secti] += 1;
         } else {
-        sectorCount[secti] = 1;
+        countryCount[secti] = 1;
         }
 
         
     }
 
-    // console.log("sectorCount",sectorCount)
+    // console.log("countryCount",countryCount)
 
     //extracting key value pair
-    for (const key in sectorCount) {
-      if (sectorCount.hasOwnProperty(key)) {
-        const value = sectorCount[key];
+    for (const key in countryCount) {
+      if (countryCount.hasOwnProperty(key)) {
+        const value = countryCount[key];
         labels.push(key);
         if(key!=''){
-          const value = sectorCount[key];
+          const value = countryCount[key];
           dataSet.push(value)
-          console.log(`Key: ${key}, Second Value: ${value}`);
+          // console.log(`Key: ${key}, Second Value: ${value}`);
         }
        
       }
@@ -54,7 +54,7 @@ const BarChart = (props) => {
     labels: labels  ,
     datasets: [
       {
-        label: "Sector Frequency",
+        label: "Country Frequency",
         data: dataSet,
         backgroundColor: [
           "#007D9C",
@@ -101,4 +101,4 @@ const BarChart = (props) => {
   )
 }
 
-export default BarChart;
+export default CountryChart;

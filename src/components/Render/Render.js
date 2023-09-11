@@ -1,26 +1,82 @@
 import React ,{useState, useEffect} from 'react'
 import "./Render.css"
 import BarChart from "../Charts/BarChart"
-import LineChart from "../Charts/LineChart"
-import PieChart from "../Charts/PieChart"
+import PieChart from "../Charts/TopicPieChart"
 import EndYear from '../Filters/EndYear'
 import { useDispatch, useSelector } from 'react-redux'
 import filterSlice from "../store/filterSlice";
-//import { setFilter } from "./filterSlice"; 
+import Likelihood from '../Filters/Likelihood'
+import Country from '../Filters/Country'
+import Intensity from '../Filters/Intensity'
+import Topic from '../Filters/Topic'
+import Relevance from '../Filters/Relevance'
+import Region from '../Filters/Region'
+import RelevanceChart from '../Charts/RelevanceChart'
+import LikelihoodChart from '../Charts/LikelihoodChart'
+import EndYearChart from '../Charts/EndYearChart'
+import TopicPieChart from '../Charts/TopicPieChart'
+import CountryChart from '../Charts/CountryChart'
+import RegionChart from '../Charts/RegionChart'
+// import LikelihoodChart from '../Charts/LikelihoodChart'
 
 const Render = () => {
 
     const dispatch=useDispatch();
+
+    // const [selectedComponent, setSelectedComponent] = useState('intensity');
+    const selectedComponent = useSelector((state) => state.filter.selectedComponent);
+
     const intensity=useSelector((state) => state.filter.filter);
-    const [data,setData] = useState([]);
+    const endYear=useSelector((state) => state.filter.End_year);
+    const likelihood = useSelector((state) => state.filter.likelihood);
+    const country = useSelector((state) => state.filter.country);
+    const topic = useSelector((state) => state.filter.topic);
+    const relevance = useSelector((state) => state.filter.relevance);
+    const region = useSelector((state) => state.filter.region);
+    const [data,setData] = useState([""]);
     const [loading,setLoading] = useState(false);
-    const end_year = 2017;
-    const start_year = 2017;
-    const likelihood = 4;
-    const country = "United States of America";
-    const region = "Northern America";
-    const topic = 'oil';
-    const pestle = 'Industries';
+
+    const renderSelectedComponent = () => {
+      switch (selectedComponent) {
+        case 'intensity':
+          return loading ? <Intensity data={data} filter={intensity} type={'intensity'} /> : <div>Loading</div>;
+        case 'end_year':
+          return loading ? <EndYear data={data} filter={endYear} type={'end_year'} /> : <div>Loading</div>;
+        case 'likelihood':
+          return loading ? <Likelihood data={data} filter={likelihood} type={'likelihood'} /> : <div>Loading</div>;
+        case 'relevance':
+          return loading ? <Relevance data={data} filter={relevance} type={'relevance'} /> : <div>Loading</div>;
+        case 'region':
+          return loading ? <Region data={data} filter={region} type={'region'} /> : <div>Loading</div>;
+        case 'country':
+          return loading ? <Country data={data} filter={country} type={'country'} /> : <div>Loading</div>;
+        case 'topic':
+          return loading ? <Topic data={data} filter={topic} type={'topic'} /> : <div>Loading</div>;
+        default:
+          return null;
+      }
+    };
+
+    const renderChart = () => {
+      switch (selectedComponent) {
+        case 'intensity':
+          return loading ? <BarChart data={data} /> : <div> Loading Api's will take Time</div>
+        case 'end_year':
+          return loading ? <EndYearChart data={data} /> : <div>Loading</div>;
+        case 'likelihood':
+          return loading ? <LikelihoodChart  data={data} /> : <div>Loading</div>;
+        case 'relevance':
+          return  loading ? <RelevanceChart data={data} /> : <div>Loading</div>
+        case 'region':
+          return  loading ? <RegionChart data={data} /> : <div>Loading</div>
+        case 'country':
+          return  loading ? <CountryChart data={data} /> : <div>Loading</div>
+        case 'topic':
+          return  loading ? <TopicPieChart data={data} /> : <div>Loading</div>
+        default:
+          return null;
+      }
+    };
     
   const getData = async () => {
     try {
@@ -45,37 +101,11 @@ const Render = () => {
 
   return (
     <div className="Charts">
-  <div className="ChartItem">
-    {loading ? <BarChart data={data} /> : <div>Loading</div>}
-  </div>
-  <div className="ChartItem">
-    {loading ? <LineChart data={data} /> : <div>Loading</div>}
-  </div>
-  <div className="ChartItem">
-    {loading ? <LineChart data={data} /> : <div>Loading</div>}
-  </div>
-  <div className="ChartItem">
-    {loading ? <LineChart data={data} /> : <div>Loading</div>}
-  </div>
-  <div className="ChartItem">
-    {loading ? <LineChart data={data} /> : <div>Loading</div>}
-  </div>
-  <div className="ChartItem">
-    {loading ? <LineChart data={data} /> : <div>Loading</div>}
-  </div>
-  <div className="ChartItem">
-    {loading ? <PieChart data={data} /> : <div>Loading</div>}
-  <div className="ChartItem">
-    {loading ? <LineChart data={data} /> : <div>Loading</div>}
-  </div>
-  <div className="ChartItem">
-    {/* {loading ?  <EndYear data={data} fliter={end_year} type={'end_year'}/> : <div>Loading</div>} */}
-    {loading ?  <EndYear data={data} filter={intensity} type={'intensity'}/> : <div>Loading</div>}
-  </div>
-  </div>
-  {/* <div className="ChartItem">
-    {loading ? <AnotherChart data={data} /> : <div>Loading</div>}
-  </div> */}
+      {renderChart()}
+      <div className="ChartItem">
+        {renderSelectedComponent()}
+      </div>
+ 
 </div>
   )
 }

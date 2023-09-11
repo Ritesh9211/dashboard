@@ -9,19 +9,19 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 // Import your action creator
 import { useDispatch } from 'react-redux';
-import { setEndYear } from "../store/filterSlice"; // Import your action creator
+import { setRegion } from "../store/filterSlice"; // Import your action creator
 
 
 
-const EndYear = (props) => {
+const Region = (props) => {
   const dispatch=useDispatch();
-  const datai = [2016, 2019,2022,2030, 2026, 2046,2055,2200];
+  const datai = ["Northern America","Northen Europe","Central America","World","Western Africa","Eastern Europe","Central Asia","South-Eastern Asia","South America","Europe","Western Africa","Oceania"];
 
   const [selectedValue, setSelectedValue] = useState(datai[0]);
 
   const Filter = props.filter;
   const type = props.type;
-  // console.log("Filter",Filter)
+  console.log("Filter",Filter)
 
   
 
@@ -38,11 +38,11 @@ const EndYear = (props) => {
 
   const handleFilterChange = (newFilterValue) => {
     // Dispatch the action using the dispatch function
-    dispatch(setEndYear(newFilterValue));
+    dispatch(setRegion(newFilterValue));
   };
 
   const handleDropdownChange = (event) => {
-    const newValue = parseInt(event.target.value, 10); // Parse selected value as an integer
+    const newValue = event.target.value; // Parse selected value as an integer
     setSelectedValue(newValue); // Update the selected value in the component's state
     handleFilterChange(newValue); // Dispatch the action with the selected value
   };
@@ -65,13 +65,14 @@ const EndYear = (props) => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow className='tablebar'>
-            <TableCell align="right">EndYear</TableCell>
-            <TableCell>Intensity</TableCell>
-            <TableCell align="right">Sector</TableCell>
             <TableCell align="right">Region</TableCell>
+            <TableCell align="right">Intensity</TableCell>
+            <TableCell align="right">EndYear</TableCell>
+            <TableCell align="right">Likelihood</TableCell>
+            <TableCell align="right">Relevance</TableCell>
             <TableCell align="right">Pestle</TableCell>
             <TableCell align="right">Source</TableCell>
-            <TableCell align="right">Region</TableCell>
+            <TableCell align="right">Topic</TableCell>
             <TableCell align="right">Country</TableCell>
             <TableCell align="right">City</TableCell>
           </TableRow>
@@ -86,8 +87,8 @@ const EndYear = (props) => {
             return row.end_year === Filter;
           case 'start_year':
             return row.start_year === Filter;
-          case 'city':
-            return row.city === Filter;
+          case 'county':
+            return row.country === Filter;
           case 'relevance':
             return row.relevance === Filter;
           case 'likelihood':
@@ -109,11 +110,14 @@ const EndYear = (props) => {
         key={filteredRow._id}
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
       >
+        <TableCell component="th" scope="row">
+          {filteredRow.region || "NULL"}
+        </TableCell>
+        <TableCell align="right">
+          {filteredRow.intensity || "NULL"}
+        </TableCell>
         <TableCell align="right">
           {filteredRow.end_year || "NULL"}
-        </TableCell>
-         <TableCell component="th" scope="row">
-          {filteredRow.intensity || "NULL"}
         </TableCell>
         <TableCell align="right">
           {filteredRow.likelihood || "NULL"}
@@ -136,9 +140,6 @@ const EndYear = (props) => {
         <TableCell align="right">
           {filteredRow.city || "NULL"}
         </TableCell>
-        <TableCell align="right">
-          {filteredRow.region || "NULL"}
-        </TableCell>
        </TableRow>
         )
       )}
@@ -149,4 +150,4 @@ const EndYear = (props) => {
   )
 }
 
-export default EndYear;
+export default Region;

@@ -9,3 +9,26 @@
     overflow: auto;
 }
 
+.tablerow{
+    position: absolute;
+    top: 0;
+}
+
+
+.dropdown-container {
+    /* Add styles to control the dropdown appearance */
+    display: inline-block; /* Ensures the dropdown is inline with the table */
+    margin-right: 10px; /* Adjust the margin as needed */
+    vertical-align: middle; /* Align vertically with table content */
+  }
+  
+  /* Optional: Customize the appearance of the select element */
+  .dropdown-container select {
+    /* Add styles to customize the appearance of the select element */
+    padding: 5px; /* Adjust padding as needed */
+    border: 1px solid #ccc; /* Add a border to the select element */
+    border-radius: 4px; /* Add border-radius for rounded corners */
+    background-color: #fff; /* Set background color */
+    /* Add more styles as needed */
+  }
+

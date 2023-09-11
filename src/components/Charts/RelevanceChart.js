@@ -4,36 +4,49 @@ import {Bar, Line ,Scatter} from "react-chartjs-2"
 // import { data } from '../../data'
 import Chart from "chart.js/auto";
 
-const IntensityOverTime = (props) => {
+const RelevanceChart = (props) => {
     const data = JSON.parse(props.data);
-    const start_year = [];
-    const intensity = [];
 
-    const a =[];
-    const b =[];
+  
     
-    data.map((d) => {  start_year.push(d.end_year)});
-    data.map((d) => {  intensity.push(d.intensity)});
-
-
-    data.map((d) => {  a.push(d.intensity)});
-    data.map((d) => {  b.push(d.likelihood)});
-
-    console.log(a,b);
-
+    const loading = true;
     const labels =[];
     const dataSet = [];
 
-
-
    
 
+    
+    const relevanceCount = {};
+
+    for (let i = 0; i < data.length; i++) {
+      let inti = data[i].relevance;
+      if (relevanceCount[inti]) {
+        relevanceCount[inti] += 1;
+      } else {
+      relevanceCount[inti] = 1;
+      }
+}
+
+    for (const key in relevanceCount) {
+      if (relevanceCount.hasOwnProperty(key)) {
+        const value = relevanceCount[key];
+        labels.push(key);
+        if(key!=''){
+          const value = relevanceCount[key];
+          dataSet.push(value)
+          // console.log(`Key: ${key}, Second Value: ${value}`);
+        }
+       
+      }
+    }
+
+
     const [state,setState] = useState({
-        labels: start_year , //yr
+        labels: labels , 
         datasets: [
         {
-            label: "Intensity Over Frequency",
-            data: intensity ,  //intensity yr
+            label: "RelevanceCount Chart",
+            data: dataSet ,  //intensity 
             backgroundColor: [
             "#007D9C",
             "#244D70",
@@ -73,25 +86,21 @@ const IntensityOverTime = (props) => {
 
   return (
     <div className='barChart'>
-        <Scatter
-          data={state}
-          height={400}
-          width={600}
-          options={options}
-        />   
-        {/* <Bar
-            data={state}
-            height={400}
-            width={600}
-            options={ {
-              responsive:true,
-              maintainAspectRatio:false,
-            }}
-        /> */}
-   
+      {
+        loading ?
+         <Line
+         data={state}
+         height={400}
+         width={600}
+         options={options}
+
+      />   : 
+          <div>Loading</div>
+        }
+             
       
     </div>
   )
 }
 
-export default IntensityOverTime;
+export default RelevanceChart;
